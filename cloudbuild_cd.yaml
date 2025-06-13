@@ -11,7 +11,7 @@ steps:
       - 'deploy'
       - '${_SERVICE_NAME}'
       - '--image'
-      - 'asia-northeast3-docker.pkg.dev/$PROJECT_ID/my-repo/${_SERVICE_NAME}:$COMMIT_SHA'
+      - 'asia-northeast3-docker.pkg.dev/$PROJECT_ID/tripout-repo/${_SERVICE_NAME}:$COMMIT_SHA'
       - '--region'
       - 'asia-northeast3'
       - '--platform'

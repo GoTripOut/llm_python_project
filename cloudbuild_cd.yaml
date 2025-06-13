@@ -1,4 +1,3 @@
-# cloudbuild.cd.yaml
 # CI를 통과한 이미지를 실제 운영 환경에 배포
 
 steps:

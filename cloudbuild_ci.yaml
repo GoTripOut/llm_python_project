@@ -1,4 +1,4 @@
-# 코드 품질 검증 및 배포 가능한 아티팩트(Docker 이미지) 생성
+# CI 파이프라인: 코드 품질 검증 및 배포 가능한 아티팩트(Docker 이미지) 생성
 
 options:
   logging: CLOUD_LOGGING_ONLY

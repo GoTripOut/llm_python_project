@@ -8,6 +8,22 @@ substitutions:
 
 steps:
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: Wait for image to exist
+    entrypoint: bash
+    args:
+      - -c
+      - |
+        for i in {1..10}; do
+          if gcloud artifacts docker images list $_REGION-docker.pkg.dev/$PROJECT_ID/tripout-repo | grep $SHORT_SHA; then
+            echo "✅ Image $_REGION-docker.pkg.dev/$PROJECT_ID/tripout-repo/${_SERVICE_NAME}:$SHORT_SHA is ready"
+            break
+          else
+            echo "⏳ Waiting for image $_REGION-docker.pkg.dev/$PROJECT_ID/tripout-repo/${_SERVICE_NAME}:$SHORT_SHA ..."
+            sleep 6
+          fi
+        done
+
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     id: Deploy to Cloud Run
     entrypoint: gcloud
     args:

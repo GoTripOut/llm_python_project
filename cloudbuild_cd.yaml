@@ -1,10 +1,8 @@
-# cloudbuild.cd.yaml
-
+# CD 파이프라인: 검증된 이미지를 Cloud Run에 배포
 options:
   logging: CLOUD_LOGGING_ONLY
 
 steps:
-  # 1) Cloud Run에 최신 이미지로 배포
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: gcloud
     args:
@@ -17,24 +15,11 @@ steps:
       - asia-northeast3
       - --platform
       - managed
-      # Cloud SQL 연결 설정
-      - --add-cloudsql-instances
-      - $PROJECT_ID:asia-northeast3:my-fastapi-instance
-      # Secret Manager의 모든 비밀을 환경변수로 주입
-      - --update-secrets
-      - >-
-        KAKAO_REST_API_KEY=KAKAO_REST_API_KEY:latest,
-        OPENAI_API_KEY=OPENAI_API_KEY:latest,
-        GEMINI_API_KEY=GEMINI_API_KEY:latest,
-        NAVER_API_CLIENT_ID=NAVER_API_CLIENT_ID:latest,
-        NAVER_API_CLIENT_SECRET=NAVER_API_CLIENT_SECRET:latest,
-        DB_PASSWORD=DB_PASSWORD:latest,
-        DB_HOST=db-host:latest,
-        DB_USER=db-user:latest,
-        DB_NAME=db-name:latest
-      # 추가 환경변수
-      - --set-env-vars
-      - DB_PORT=3306
+      - '--service-account=tripout-runner@YOUR_GCP_PROJECT_ID.iam.gserviceaccount.com'
+      - '--add-cloudsql-instances=YOUR_GCP_PROJECT_ID:asia-northeast3:my-fastapi-instance'
+      - '--update-secrets=KAKAO_REST_API_KEY=KAKAO_REST_API_KEY:latest,OPENAI_API_KEY=OPENAI_API_KEY:latest,GEMINI_API_KEY=GEMINI_API_KEY:latest,NAVER_API_CLIENT_ID=NAVER_API_CLIENT_ID:latest,NAVER_API_CLIENT_SECRET=NAVER_API_CLIENT_SECRET:latest,DB_PASSWORD=DB_PASSWORD:latest,DB_HOST=db-host:latest,DB_USER=db-user:latest,DB_NAME=db-name:latest'
+      - '--set-env-vars=DB_PORT=3306'
+      - '--allow-unauthenticated'
 
 # 이 파일 내에서 사용할 커스텀 변수
 substitutions:

@@ -1,5 +1,8 @@
 # 코드 품질 검증 및 배포 가능한 아티팩트(Docker 이미지) 생성
 
+options:
+  logging: CLOUD_LOGGING_ONLY
+
 steps:
   # 1. Docker 이미지 빌드
   # 현재 폴더의 Dockerfile을 사용해, 우리 앱을 컨테이너 이미지로 만듭니다.

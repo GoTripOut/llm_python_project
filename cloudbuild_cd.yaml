@@ -1,4 +1,8 @@
 # cloudbuild.cd.yaml
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
 steps:
   # 1) Cloud Run에 최신 이미지로 배포
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'

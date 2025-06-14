@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY ./app /app
 
 # 5. 서버 실행: app/fastapi_cicd/flutter_fast_api.py 파일의 app 객체를 실행
-CMD ["uvicorn", "app.fastapi_cicd.flutter_fast_api:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["uvicorn", "fastapi_cicd.flutter_fast_api:app", "--host", "0.0.0.0", "--port", "8080"]

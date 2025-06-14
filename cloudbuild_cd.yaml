@@ -15,8 +15,8 @@ steps:
       - asia-northeast3
       - --platform
       - managed
-      - '--service-account=tripout-runner@YOUR_GCP_PROJECT_ID.iam.gserviceaccount.com'
-      - '--add-cloudsql-instances=YOUR_GCP_PROJECT_ID:asia-northeast3:my-fastapi-instance'
+      - '--service-account=tripout-runner@tripout-project.iam.gserviceaccount.com'
+      - '--add-cloudsql-instances=tripout-project:asia-northeast3:my-fastapi-instance'
       - '--update-secrets=KAKAO_REST_API_KEY=KAKAO_REST_API_KEY:latest,OPENAI_API_KEY=OPENAI_API_KEY:latest,GEMINI_API_KEY=GEMINI_API_KEY:latest,NAVER_API_CLIENT_ID=NAVER_API_CLIENT_ID:latest,NAVER_API_CLIENT_SECRET=NAVER_API_CLIENT_SECRET:latest,DB_PASSWORD=DB_PASSWORD:latest,DB_HOST=db-host:latest,DB_USER=db-user:latest,DB_NAME=db-name:latest'
       - '--set-env-vars=DB_PORT=3306'
       - '--allow-unauthenticated'

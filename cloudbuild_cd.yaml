@@ -2,25 +2,26 @@
 options:
   logging: CLOUD_LOGGING_ONLY
 
+substitutions:
+  _SERVICE_NAME: 'my-fastapi-service'
+  _REGION: 'asia-northeast3'
+
 steps:
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: Deploy to Cloud Run
     entrypoint: gcloud
     args:
       - run
       - deploy
       - ${_SERVICE_NAME}
       - --image
-      - asia-northeast3-docker.pkg.dev/$PROJECT_ID/tripout-repo/${_SERVICE_NAME}:$COMMIT_SHA
+      - $_REGION-docker.pkg.dev/$PROJECT_ID/tripout-repo/${_SERVICE_NAME}:$SHORT_SHA
       - --region
-      - asia-northeast3
+      - $_REGION
       - --platform
       - managed
-      - '--service-account=tripout-runner@tripout-project.iam.gserviceaccount.com'
-      - '--add-cloudsql-instances=tripout-project:asia-northeast3:my-fastapi-instance'
-      - '--update-secrets=KAKAO_REST_API_KEY=KAKAO_REST_API_KEY:latest,OPENAI_API_KEY=OPENAI_API_KEY:latest,GEMINI_API_KEY=GEMINI_API_KEY:latest,NAVER_API_CLIENT_ID=NAVER_API_CLIENT_ID:latest,NAVER_API_CLIENT_SECRET=NAVER_API_CLIENT_SECRET:latest,DB_PASSWORD=DB_PASSWORD:latest,DB_HOST=db-host:latest,DB_USER=db-user:latest,DB_NAME=db-name:latest'
-      - '--set-env-vars=DB_PORT=3306'
-      - '--allow-unauthenticated'
-
-# 이 파일 내에서 사용할 커스텀 변수
-substitutions:
-  _SERVICE_NAME: 'my-fastapi-service'
+      - --service-account=tripout-runner@${PROJECT_ID}.iam.gserviceaccount.com
+      - --add-cloudsql-instances=tripout-project:$_REGION:my-fastapi-instance
+      - --update-secrets=KAKAO_REST_API_KEY=KAKAO_REST_API_KEY:latest,OPENAI_API_KEY=OPENAI_API_KEY:latest,GEMINI_API_KEY=GEMINI_API_KEY:latest,NAVER_API_CLIENT_ID=NAVER_API_CLIENT_ID:latest,NAVER_API_CLIENT_SECRET=NAVER_API_CLIENT_SECRET:latest,DB_PASSWORD=DB_PASSWORD:latest,DB_HOST=db-host:latest,DB_USER=db-user:latest,DB_NAME=db-name:latest
+      - --set-env-vars=DB_PORT=3306
+      - --allow-unauthenticated

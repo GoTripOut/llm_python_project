@@ -12,4 +12,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY ./app /app/app
 
 # 5. FastAPI 서버 실행
-CMD ["uvicorn", "app.fastapi_cicd.flutter_fast_api:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["sh", "-c", "echo '🔥 Starting server...' && uvicorn fastapi_cicd.flutter_fast_api:app --host 0.0.0.0 --port 8080"]

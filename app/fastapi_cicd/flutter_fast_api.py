@@ -10,6 +10,7 @@ import time
 import threading
 import socket
 import pymysql as sql
+import os
 
 load_dotenv()
 
@@ -18,10 +19,10 @@ app = FastAPI()
 # 오류 나서 주석 처리
 
 conn = sql.connect(
-    host='127.0.0.1',
-    user='root',
-    password=config.DB_PASSWORD,
-    database='route_recommendation',
+    host=os.getenv("DB_HOST"),  # 실제 값은 secret에서 환경변수로 주입
+    user=os.getenv("DB_USER"),
+    password=os.getenv("DB_PASSWORD"),
+    database=os.getenv("DB_NAME"),
     charset='utf8mb4',
 )
 
@@ -199,7 +200,7 @@ async def user_validation(userID: str, userPW: str):
         else:
             return True
     except Exception as e:
-        print(f'uesr validation error {e}')
+        print(f'user validation error {e}')
 
 @app.get("/get_connect_state")
 async def get_connect_state():

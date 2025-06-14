@@ -23,4 +23,4 @@ steps:
       - '$_REGION-docker.pkg.dev/$PROJECT_ID/tripout-repo/${_SERVICE_NAME}:$SHORT_SHA'
 
 images:
-  - '$_REGION-docker.pkg.dev/$PROJECT_ID/tripout-repo/${_SERVICE_NAME}:$SHORT_SHA
+  - '$_REGION-docker.pkg.dev/$PROJECT_ID/tripout-repo/${_SERVICE_NAME}:$SHORT_SHA'

@@ -21,7 +21,7 @@ if is_cloud_run():
     privateIP = os.getenv("SERVICE_URL", "https://your-cloud-run-url.run.app/")
 
     conn = sql.connect(
-        unix_socket="/cloudsql/tripout-project:asia-northeast3:my-fastapi-instance",
+        unix_socket=os.getenv("DB_HOST"),
         user=os.getenv("DB_USER"),
         password=os.getenv("DB_PASSWORD"),
         database=os.getenv("DB_NAME"),

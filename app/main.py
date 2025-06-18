@@ -50,9 +50,9 @@ async def process_category(category: str, x: float, y: float):
     # OpenAI client 정의
     client = AsyncOpenAI(api_key = config.OPENAI_API_KEY)
 
-    start_time = time.time()
+    start_time = time.process_time()
     search_result = await asyncio.to_thread(kakaomap_rest_api.search_by_category, x, y, category, 15)
-    end_time = time.time()
+    end_time = time.process_time()
     print(f"카카오맵 주변 카테고리 검색 시간: {end_time - start_time:.2f}초")
 
     # 장소 이름을 key로 하며, 좌표 값을 저장하는 dict

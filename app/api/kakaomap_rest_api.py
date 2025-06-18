@@ -10,7 +10,8 @@ def search_by_category(longitude, latitude, category_code, size=15):
         'x': longitude,
         'y': latitude,
         'radius': 3000,  # 검색 반경 설정 (단위: 미터)
-        'size': size      # 한 페이지에 보여질 결과 개수 (최대 15)
+        'size': size,      # 한 페이지에 보여질 결과 개수 (최대 15)
+        'sort': 'distance' # 결과를 distance를 기준으로 정렬
     }
 
     # API 요청
